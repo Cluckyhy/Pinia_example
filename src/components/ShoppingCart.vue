@@ -5,9 +5,7 @@
       <i>请添加一些商品到购物车</i>
     </p>
     <ul>
-      <li>商品名称 - 商品价格 × 商品数量</li>
-      <li>商品名称 - 商品价格 × 商品数量</li>
-      <li>商品名称 - 商品价格 × 商品数量</li>
+      <li v-for="(item, index) in cartStore.cartProduts" :key="index">{{item.title}} - {{item.price}} x {{item.quantity}}</li>
     </ul>
     <p>商品总价</p>
     <p>
@@ -18,5 +16,7 @@
 </template>
 
 <script lang="ts" setup>
+import { useCartStore } from '../store/cart'
 
+const cartStore = useCartStore()
 </script>
