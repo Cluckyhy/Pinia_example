@@ -5,6 +5,7 @@ import {defineStore} from 'pinia'
 // 参数2：配置选项对象
 // 返回值：一个函数，调用得到容器实例
 export const useMainStore = defineStore('main',{
+// 2.使用容器中的 state
   /* 
     类似于组件的data, 用来存储全局状态的
       1.必须是一个函数：这样是为了在服务端渲染的时候避免交叉请求导致的数据状态污染
@@ -18,6 +19,7 @@ export const useMainStore = defineStore('main',{
     }
   },
 
+// 3.修改容器中的 state
   /* 
     类似于组件的 computed，用来封装计算属性，有缓存功能
   */
@@ -37,6 +39,7 @@ export const useMainStore = defineStore('main',{
     // }
   },
 
+// 4.容器中的 action 的使用
   /* 
     类似于组件的 methods，封装业务逻辑，修改 state
   */
@@ -53,10 +56,3 @@ export const useMainStore = defineStore('main',{
     }
   }
 })
-
-// 2.使用容器中的 state
-
-
-// 3.修改容器中的 state
-
-// 4.容器中的 action 的使用
