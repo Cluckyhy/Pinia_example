@@ -7,11 +7,11 @@
     <ul>
       <li v-for="(item, index) in cartStore.cartProduts" :key="index">{{item.title}} - {{item.price}} x {{item.quantity}}</li>
     </ul>
-    <p>商品总价</p>
+    <p>商品总价：{{cartStore.totalPrice}}</p>
     <p>
-      <button>结算</button>
+      <button @click="cartStore.checkout">结算</button>
     </p>
-    <p>结算成功 / 失败.</p>
+    <p v-show="cartStore.checkoutStatus">结算{{ cartStore.checkoutStatus}}</p>
   </div>
 </template>
 

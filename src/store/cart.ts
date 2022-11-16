@@ -1,5 +1,5 @@
 import {defineStore} from 'pinia'
-import { IProduct } from '../api/shop'
+import { buyProducts, IProduct } from '../api/shop'
 import {useProductsStore} from './products'
 
 // {id, title, price, quantity}
@@ -10,7 +10,8 @@ type CartProduct = {
 export const useCartStore = defineStore('cart',{
   state:() => {
     return {
-      cartProduts: [] as CartProduct[]  // 购物车商品列表
+      cartProduts: [] as CartProduct[],  // 购物车商品列表
+      checkoutStatus: null as null | string
     }
   },
   getters:{
@@ -20,6 +21,10 @@ export const useCartStore = defineStore('cart',{
       },0)
     }
   },
+
+  // 定义一堆的：mutation，修改得 commit
+  // 还有一堆的：mutation types
+  // action 调用得 dispatch
 
   actions:{
     addProductsToCart(product: IProduct){
@@ -47,6 +52,13 @@ export const useCartStore = defineStore('cart',{
       // product.inventory--
       const productsStore = useProductsStore()
       productsStore.decrementProduct(product)
+    },
+    async checkout(){
+      const ret = await buyProducts()
+      this.checkoutStatus = ret ? '成功' : '失败'
+      if(ret){
+        this.cartProduts = []
+      }
     }
   }
 })
